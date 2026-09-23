@@ -6,13 +6,26 @@ Shapes marked **Approved** are frozen — any change is announced before it ship
 - Base URL (local): `http://localhost:8000`
 - All bodies are JSON, field names are `snake_case`.
 - Invalid input (missing field, wrong type, value outside an allowed set) returns FastAPI's standard **422** response — never a silent default.
+- Extra fields in a request body are ignored, so a whole MongoDB document (with `_id` etc.) can be forwarded as long as the required fields are present.
 
 | Endpoint | Status |
 |---|---|
+| `GET /health` | **Approved** |
 | `POST /predict/task-time` | **Approved** |
 | `POST /predict/anomaly` | **Approved** |
 | `POST /predict/maintenance-score` | **Approved** |
 | `POST /generate-handover-report` | TBD (Phase 4) |
+
+---
+
+## GET /health — Approved
+
+Liveness check. Returns once both models are loaded.
+
+**Response**
+```json
+{"status": "ok", "models_loaded": ["anomaly", "task_time"]}
+```
 
 ---
 
@@ -153,7 +166,7 @@ Score is the sum of three rule-based components:
 
 | Component | Max points |
 |---|---|
-| Hydraulic pressure downward trend | 40 |
+| Hydraulic pressure below rated 330 bar or falling across window | 40 |
 | Hours since service vs 500 h interval | 35 |
 | Fuel usage upward trend | 25 |
 
