@@ -9,14 +9,14 @@ Shapes marked **Approved** are frozen — any change is announced before it ship
 
 | Endpoint | Status |
 |---|---|
-| `POST /predict/task-time` | Proposed |
-| `POST /predict/anomaly` | Proposed |
+| `POST /predict/task-time` | **Approved** |
+| `POST /predict/anomaly` | **Approved** |
 | `POST /predict/maintenance-score` | **Approved** |
 | `POST /generate-handover-report` | TBD (Phase 4) |
 
 ---
 
-## POST /predict/task-time — Proposed
+## POST /predict/task-time — Approved
 
 Predicts how long a task will actually take. Takes one Task document.
 
@@ -58,7 +58,7 @@ Predicts how long a task will actually take. Takes one Task document.
 
 ---
 
-## POST /predict/anomaly — Proposed
+## POST /predict/anomaly — Approved
 
 Flags a single telemetry reading as normal or anomalous. Takes one Telemetry document.
 
@@ -96,6 +96,7 @@ Flags a single telemetry reading as normal or anomalous. Takes one Telemetry doc
 ```
 - `is_anomaly`: boolean — the flag the backend should act on.
 - `anomaly_score`: relative score, higher = more unusual. `is_anomaly` is `true` exactly when `anomaly_score > 0`. Not a probability.
+- The 0 boundary is deliberate: `anomaly_score` is the negated Isolation Forest `decision_function`, which is offset so that 0 sits at the model's 3% contamination threshold — about 3% of training readings score above 0. On live data the flagged rate follows the incoming readings (a misbehaving machine will exceed 3%), but the cutoff stays fixed at 0.
 
 ---
 
