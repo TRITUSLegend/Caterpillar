@@ -1,0 +1,15 @@
+Operator_ID,Name,Role,Skill_Level
+OP01,Ravi Menon,operator,Beginner
+OP02,Arjun Patel,operator,Intermediate
+OP03,Kiran Rao,operator,Intermediate
+OP04,Deepak Singh,operator,Expert
+OP05,Neha Sharma,operator,Expert
+OP06,Vikram Joshi,operator,Beginner
+OP07,Pooja Iyer,operator,Intermediate
+OP08,Sanjay Gupta,operator,Beginner
+OP09,Anita Das,operator,Intermediate
+OP10,Rahul Verma,operator,Expert
+OP11,Meera Nair,operator,Beginner
+OP12,Aman Khanna,operator,Expert
+OP13,Priya Kulkarni,manager,Expert
+OP14,Rohit Bansal,manager,Expert
